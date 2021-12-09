@@ -8,36 +8,24 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Getter
 @Setter
-@ToString
+@Getter
 @NoArgsConstructor
-@Builder
 @Entity
 @Table(name = "owners")
-public class Owner extends Person{
+public class Owner extends Person {
 
-    public Owner(String address, String city, String telephone, Set<Pet> pets) {
-        this.address = address;
-        this.city = city;
-        this.telephone = telephone;
-        this.pets = pets;
-    }
-
-    public Owner(Long id, String firstName, String lastName, String address, String city, String telephone, Set<Pet> pets) {
+    @Builder
+    public Owner(Long id, String firstName, String lastName, String address, String city,
+                 String telephone, Set<Pet> pets) {
         super(id, firstName, lastName);
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.pets = pets;
-    }
 
-    public Owner(String firstName, String lastName, String address, String city, String telephone, Set<Pet> pets) {
-        super(firstName, lastName);
-        this.address = address;
-        this.city = city;
-        this.telephone = telephone;
-        this.pets = pets;
+        if (pets != null) {
+            this.pets = pets;
+        }
     }
 
     @Column(name = "address")
